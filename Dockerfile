@@ -1,6 +1,8 @@
 FROM ubuntu:14.04
 
 RUN apt-get update && apt-get install -y \
+	curl \
+	unzip \
 	openjdk-7-jdk \
 	ant \
 	lib32z1 \
@@ -9,10 +11,12 @@ RUN apt-get update && apt-get install -y \
 	lib32stdc++6 \
 	git
 
-COPY appengine-java-sdk-1.9.64 /root/appengine-java-sdk-1.9.64 
+# RUN curl 'https://storage.googleapis.com/appengine-sdks/featured/appengine-java-sdk-1.9.65.zip' > /tmp/appengine.zip %% unzip -d /root /tmp/appengine.zip && rm /tmp/appengine.zip
 
-ENV PATH="$PATH:/root/appengine-java-sdk-1.9.64/bin/"
+COPY appengine-java-sdk/appengine-java-sdk-1.9.65 /root/appengine-java-sdk-1.9.65
 
-RUN cd /root
+ENV PATH="$PATH:/root/appengine-java-sdk-1.9.65/bin/"
 
 EXPOSE 8888
+
+RUN cd /root
