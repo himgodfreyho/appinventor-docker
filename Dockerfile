@@ -23,4 +23,6 @@ ENV PATH="$PATH:/root/appengine-java-sdk-1.9.66/bin/"
 
 ENV PATH="$PATH:/root/scripts/"
 
+WORKDIR /root/
+
 EXPOSE 8888

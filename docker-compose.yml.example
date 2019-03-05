@@ -1,0 +1,10 @@
+version: '3'
+services:
+  appinventorserver:
+    build: .
+    ports:
+     - "8888:8888"
+    volumes:
+     - /Users/hoyikhim/Dropbox/Development/appinventor-extensions-wency:/root/appinventor-sources
+    stdin_open: true
+    tty: true
