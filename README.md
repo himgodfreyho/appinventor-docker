@@ -23,7 +23,7 @@ After the image is built, you can log on to the container by:
 ```
 docker run -it -p 8888:8888 -v "YOUR_APP_INVENTOR_PARENT_FOLDER_FULL_PATH:/root/appinventor-sources/" appinventorserver
 ```
-The ``-p 8888:8888`` option forwards your 8888 port to the container 8888 port, so that you can access it at http://localhost:8888 on your host computer. (Host computer is the machine you are using, i.e., the Windows or Mac computer) 
+The ``-p 8888:8888`` option forwards your 8888 port to the container 8888 port, so that you can access it at http://localhost:8888 on your host computer. (Host computer is the machine you are using, e.g., your Windows or Mac computer) 
 
 The ``-v "YOUR_APP_INVENTOR_PARENT_FOLDER_FULL_PATH:/root/appinventor-sources/"`` option mounts the source code at your host computer to the container. The reason is that normally we shall use our favorite IDE to change the source code on our host computer. By mounting the source code as a volume, any changes to the source code will be synced to the container.
 
@@ -48,9 +48,9 @@ It should say:
 ```
 Starting appinventor-docker_appinventorserver_1 ... done
 ```
-Note the container name. In this case, the name is *appinventor-docker\_appinventorserver\_1*.
+Note the container name. In this case, the name is *appinventor-docker\_appinventorserver\_1*. You can also run ``docker container ls`` to check the name of all your containers. 
 
-To log on to the container, use ``docker exec -it <CONTAINER> /bin/bash``. For example:
+To log on to the container, use ``docker exec -it <CONTAINER_NAME> /bin/bash``. For example:
 
 ```
 docker exec -it appinventor-docker_appinventorserver_1 /bin/bash
@@ -58,17 +58,25 @@ docker exec -it appinventor-docker_appinventorserver_1 /bin/bash
 
 Follow the setup instructions at https://github.com/mit-cml/appinventor-sources.
 
-###Starting the server
-To start the server, you normally run
+### Starting the server
+After logged on to the container, to start the server, you normally run
 
 ```
-your-appengine-SDK-folder/bin/dev_appserver.sh --port=8888 --address=0.0.0.0 appengine/build/war/
+YOUR_APPENGINE_SDK_FOLDER/bin/dev_appserver.sh --port=8888 --address=0.0.0.0 appengine/build/war/
 ```
-Alternatively, a *startserver.sh* script is prepared for you and added to the PATH, so that you do not need to memorize the path of your appengine SDK folder. You can simply run 
+Alternatively, a *startserver.sh* script is prepared for you and added to the PATH, so that you do not need to memorize the path of your appengine SDK folder. You can simply run this command in your container (i.e., after you execute ``docker exec -it appinventor-docker_appinventorserver_1 /bin/bash``)
 
 ```
 startserver.sh
 ```
+
+The server should start within a few minutes, and say:
+
+```
+INFO: Dev App Server is now running
+```
+
+Now you can open it at http://localhost:8888/ on your browser.
 
 # App Inventor Development
 This section contains detailed instructions on how to set up an App Inventor server using Docker and how to develop App Inventor blocks.
